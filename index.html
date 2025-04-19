@@ -10,8 +10,31 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="book-container">
+    <dialog id="new-book-dialog">
+        <h1>Create new book</h1>
+        <form action="javascript:void(0)" id="new-book-form">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required>
 
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" required>
+
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" id="pages" min="0" required>
+
+            <label for="read">Read?</label>
+            <input type="checkbox" name="read" id="read">
+
+            <button type="submit">Create book!</button>
+        </form>
+    </dialog>
+
+    <h1>Your books</h1>
+    <div id="book-container">
+        <button id="create">
+            <img src="plus.svg" alt="Add symbol">
+            <h2>Create Book</h2>
+        </button>
     </div>
 </body>
 </html>
