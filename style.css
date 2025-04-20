@@ -1,14 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap');
+
 body {
     background-color: #f3f3f3;
-    padding: 2rem;
+    font-family: 'Poppins';
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h3, h4, h5, h6, p {
     margin: 0;
 }
 
-h1:not(.card h1) {
-    margin-bottom: 1rem;
+header {
+    background-color: white;
+    box-shadow: 0rem 1rem 2rem rgb(0 0 0 / 25%);
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-family: 'Winky Rough';
+}
+
+header h1 {
+    display: flex;
+    font-weight: normal;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+header span {
+    font-weight: bolder;
+    color: #cd1843;
+}
+
+footer {
+    display: flex;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(37, 40, 54);
+    color: white;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
+#container {
+    padding: 2rem;
 }
 
 #book-container {
@@ -61,6 +102,9 @@ h1:not(.card h1) {
 
 .card {
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card > p, .card span {font-weight: bold;}
@@ -73,20 +117,116 @@ h1:not(.card h1) {
     color: green;
 }
 
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+    align-items: stretch;
+}
+
+.actions button {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 0;
+    transition: 0.3s;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    box-shadow: 0.5rem 0.5rem 1rem rgb(0 0 0 / 25%);
+}
+
+.delete {
+    background-color: #ef476f;
+}
+
+.delete:hover {
+    background-color: #d43b5f;
+}
+
+.delete:active {
+    background-color: #7f1b32;
+}
+
+.read {
+    background-color: #06d6a0;
+}
+
+.read:hover {
+    background-color: #06c391;
+}
+
+.read:active {
+    background-color: #00936c;
+}
+
+.unread {
+    background-color: #7e7e7e;
+}
+
+.unread:hover {
+    background-color: #676767;
+}
+
+.unread:active {
+    background-color: #3b3b3b;
+}
+
 #new-book-dialog {
     z-index: 2;
     border: none;
     border-radius: 1rem;
-}
-
-#new-book-dialog form {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-    justify-items: left;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    grid-template-areas:
+        'heading close'
+        'form form';
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1.5rem 2rem;
 }
 
-#new-book-dialog form button {
+#new-book-dialog > button {
+    grid-area: close;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+#new-book-dialog img {
+    width: 2rem;
+    height: auto;
+    transform: scale(1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+#new-book-dialog img:hover {
+    transform: scale(1.25);
+}
+
+#new-book-dialog h1 {
+    grid-area: heading;
+    margin: 0;
+}
+
+#new-book-form {
+    display: grid;
+    gap: 1rem;
+    justify-items: stretch;
+    grid-area: form;
+    grid-template-columns: min-content 1fr;
+}
+
+#new-book-form input[type="checkbox"] {justify-self: left;}
+
+#new-book-form button {
     grid-column: 1 / -1;
     justify-self: stretch;
 }
@@ -101,8 +241,13 @@ dialog,
     transition:
         display 0.3s allow-discrete,
         overlay 0.3s allow-discrete,
-        opacity 0.3s;
+        opacity 0.3s,
+        transform 0.3s;
     opacity: 0;
+}
+
+dialog {
+    transform: scale(0);
 }
 
 /* On Stage */
@@ -111,6 +256,7 @@ dialog,
 [open],
 [open]::backdrop {
     opacity: 1;
+    transform: scale(1);
 }
 
 /* Off Stage */
@@ -120,6 +266,10 @@ dialog,
     [open],
     [open]::backdrop {
         opacity: 0;
+    }
+
+    [open] {
+        transform: scale(0);
     }
 }
 
